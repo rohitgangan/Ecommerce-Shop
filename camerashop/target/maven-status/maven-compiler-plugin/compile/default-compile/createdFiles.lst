@@ -1,0 +1,7 @@
+com\camerashop\controller\CameraShopController.class
+com\camerashop\model\UserDetails.class
+com\camerashop\service\CategoryService.class
+com\camerashop\DAO\CategoryDAO.class
+com\camerashop\implementation\CategoryDAOImplementation.class
+com\camerashop\model\Category.class
+com\camerashop\controller\CategoryController.class
