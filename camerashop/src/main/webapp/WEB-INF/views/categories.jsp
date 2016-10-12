@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Spring Form</title>
+<title>Category Form</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 
@@ -16,10 +16,10 @@
 </head>
 <body ng-app="gCategory" ng-controller="gController">
 <form:form method="POST" action="add/category" modelAttribute="category">
-<label>category Name</label>
+<label>Category Name</label>
 <form:input path="categoryName"/>
 </br>
-<labe>category Description<label>
+<labe>Category Description<label>
 <form:input path="categoryDescription"/>
 <input type="submit" value="Submit"/>
 </form:form>

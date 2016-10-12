@@ -33,6 +33,12 @@ public class CategoryService {
 	{
 		return this.categoryDAOImplementation.stringCategory();
 		
+	}
+	
+	@Transactional
+	public Category getCategoryIdByName(String categoryName)
+	{
 		
+		return categoryDAOImplementation.getIdByName(categoryName);
 	}
 }

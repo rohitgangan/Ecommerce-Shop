@@ -34,8 +34,21 @@ public class CategoryDAOImplementation implements CategoryDAO{
 		String categoryGson = gson.toJson(categoryJList);
 		return categoryGson;
 	}
+	@SuppressWarnings("unchecked")
+	public Category getIdByName(String categoryName) {
+		// TODO Auto-generated method stub
+		String query = "from Category WHERE categoryName= '"+categoryName+"'";
+		List<Category> CategoryList = sessionFactory.getCurrentSession().createQuery(query).getResultList();
+		if(CategoryList != null && !CategoryList.isEmpty())
+		{
+			
+			return CategoryList.get(0);
+		}
+		else
+		{
+		return null;
+		}
 	
-	
-
-	
+	}
+		
 }

@@ -20,10 +20,10 @@ public class CategoryController {
 	@RequestMapping("/c")
 	public String Categories(Model model)
 	{
-		//model.addAttribute("category" ,new Category());
+		model.addAttribute("category" ,new Category());
 		//model.addAttribute("categoryString", this.categoryService.stringCategory());
-		model.addAttribute("cat", categoryService.stringCategory());
-		return "demo";
+		//model.addAttribute("cat", categoryService.stringCategory());
+		return "categories";
 		
 		
 	}
