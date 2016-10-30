@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<!-- Executed when webFlow is triggered -->
+	<on-start>
+	<!-- demohandler is java class available through annotated Demohandler.java class.here we are calling it’s initFlow() method. -->
+	  <evaluate expression="userHandler.initFlow()" result="flowScope.userDetails"/>
+	</on-start>
+		 <!-- if not specified the first view state is the starting state -->
+	<view-state id="start" view="WebFlowRegister" model="flowScope.useDetails">
+	   <transition on="submit" to="validate"/>
+	</view-state>
+
+
+
+</flow>
