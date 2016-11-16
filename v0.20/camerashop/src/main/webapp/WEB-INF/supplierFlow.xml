@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<!-- Executed when webFlow is triggered -->
+	<var name="userDetails" class="com.camerashop.model.UserDetails" /> 
+	<var name="supplier" class="com.camerashop.model.Supplier"/>
+<!-- 	<var name="billingAddress" class="com.camerashop.model.BillingAddress" /> -->
+<!-- 	<var name="shippingAddress" class="com.camerashop.model.ShippingAddress" /> -->
+<!-- 	<var name="userService" class="com.camerashop.service.UserService" /> -->
+	
+	<on-start>
+	<!-- demohandler is java class available through annotated Demohandler.java class.here we are calling it’s initFlow() method. -->
+	  <evaluate expression="userHandler.initFlow()" result="flowScope.userDetails"/>
+	</on-start>
+		 <!-- if not specified the first view state is the starting state -->
+	<view-state id="start" view="WebFlowRegister" model="flowScope.userDetails">
+	   <transition on="submit" to="validateUser"/>
+	</view-state>
+	
+			<action-state id="validateUser">
+		<evaluate expression="userHandler.validateDetails(userDetails,messageContext)"></evaluate>
+		<transition on="success" to="checkDuplicate" />
+		<transition on="failure" to="start" />
+	</action-state>
+	
+	<action-state id="checkDuplicate">
+		<evaluate expression="userHandler.checkDuplicate(userDetails,messageContext)"></evaluate>
+		<transition on="success" to="confirmDetails" />
+		<transition on="failure" to="start" />
+	</action-state>
+	
+		<view-state id="confirmDetails" view="confirmDetails" model="flowScope.userDetails">
+		<transition on="edit" to="start" />
+		<transition on="submit" to="supplierAddress" />
+	</view-state>
+
+
+	<view-state id="supplierAddress" view="supplierAddress" model="supplierAddress">
+		<transition on="back" to="WebFlowRegister" />
+		<transition on="submit" to="addSupplierAddress" />
+	</view-state>
+	
+	<action-state id="addSupplierAddress">
+		<evaluate expression="userHandler.addSupplierAddress(supplierAddress)"></evaluate>
+		<transition on="success" to="saveOrUpdateSupplier" />
+	</action-state>
+	
+
+
+	<action-state id="saveOrUpdateSupplier">
+		<evaluate expression="userHandler.saveOrUpdateSupplier(flowScope.userDetails, supplierAddress)"></evaluate>
+		<transition on="success" to="save" />
+	</action-state>
+	
+	
+	<action-state id="save">
+		<evaluate expression="newSupplierService.saveOrUpdate(userDetails)" result="userDetails"></evaluate>
+		<transition on="success" to="login" />
+	</action-state>
+
+<end-state id="login" view="login"/>
+<end-state id="index" view="index"/>
+<end-state id="toHome" view="externalRedirect:/"/>
+<end-state id="toException" view="externalRedirect:contextRelative:exception.jsp"/>
+
+<global-transitions>
+<transition on="home" to="toHome"/>
+<transition on="error" to="toException"/>
+</global-transitions>
+
+</flow>
