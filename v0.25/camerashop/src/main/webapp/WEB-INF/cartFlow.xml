@@ -1,0 +1,22 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+	 http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+<var name="buyNow" class="com.camerashop.model.BuyNow"/>
+<var name="shippingAddress" class="com.camerashop.model.ShippingAddress"/>
+<var name="billingAddress" class="com.camerashop.model.BillingAddress"/>
+<var name="userDetails" class="com.camerashop.model.UserDetails"/>
+<var name="cartItem" class="com.camerashop.model.CartItem"/>
+
+<on-start>
+<evaluate expression="cartHandler.initFlow()" result="flowScope.buyNow"></evaluate>
+</on-start>
+
+    <view-state id="start" view="index" model="flowScope.buyNow">
+		<transition on="submit" to="success"/> 
+		<transition on="cancel" to="cancel"/>
+	</view-state>
+	
+<end-state id="cancel" view="externalRedirect:contextRelative:/home"/>	
+</flow>
