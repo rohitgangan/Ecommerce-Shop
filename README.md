@@ -31,4 +31,4 @@ CSS 3
 
 Bootstrap
 
-Clone and download the project to your loval repository. Import in your workspace anfd run on server
+Clone and download the project to your local repository. Import in your workspace anfd run on server
